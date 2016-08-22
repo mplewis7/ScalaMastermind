@@ -48,7 +48,7 @@ object Mastermind extends App {
 
   def removeFromS(lg: Array[Int], black: Int, silv: Int) {
     for (i <- 0 until s.size reverse) {
-      val (go, si) = getGS(s(i), lg)
+      val (go, si) = getScore(s(i), lg)
       if (!(go == black && si == silv)) {
         s = s.patch(i, Nil, 1)
       }
@@ -85,14 +85,14 @@ object Mastermind extends App {
   def numRemoved(lg: Array[Int], black: Int, silv: Int): Int = {
     var count = 0
     for (i <- 0 until s.length) {
-      val (go, si) = getGS(s(i), lg)
+      val (go, si) = getScore(s(i), lg)
       if (go != black || si != silv) count = count + 1
     }
     //print(count + " ")
     count
   }
 
-  def getGS(newS: Array[Int], code: Array[Int]): (Int, Int) = {
+  def getScore(newS: Array[Int], code: Array[Int]): (Int, Int) = {
     var black = 0
     var white = 0
     var usedC = Array[Boolean](false, false, false, false)
